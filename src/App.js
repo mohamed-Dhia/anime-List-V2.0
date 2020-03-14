@@ -1,7 +1,7 @@
 import React from 'react';
 import { MDBCol, MDBFormInline, MDBBtn } from 'mdbreact';
 
-const SearchPage = () => {
+const App = () => {
   return (
     <MDBCol md="12">
       <MDBFormInline className="md-form mr-auto mb-4">
@@ -37,4 +37,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default App;
