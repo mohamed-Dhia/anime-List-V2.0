@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { MDBCol, MDBFormInline, MDBBtn } from 'mdbreact';
-import services from '../services';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+// import services from '../services';
+import searchBarActions from '../actions/searchBarActions';
 
-const {
-  searchAnimeService: { searchAnime },
-} = services;
+// const {
+//   searchBarService: { searchAnime },
+// } = services;
+const { searchAnime } = searchBarActions;
 
-const SearchBar = () => {
+const SearchBar = props => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [animeList, setAnimeList] = useState([]);
+  // const [animeList, setAnimeList] = useState([]);
 
   const updateTerm = e => {
     e.preventDefault();
@@ -17,7 +21,8 @@ const SearchBar = () => {
 
   const submit = async e => {
     e.preventDefault();
-    setAnimeList(await searchAnime(searchTerm));
+    await props.searchAnime(searchTerm);
+    // setAnimeList(await searchAnime(searchTerm));
   };
 
   return (
@@ -46,4 +51,12 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+SearchBar.prototype = {
+  searchAnime: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  animeList: state.animeList,
+});
+
+export default connect(mapStateToProps, { searchAnime })(SearchBar);

@@ -1,3 +1,3 @@
-import searchAnimeService from './searchBarService';
+import searchBarService from './searchBarService';
 
-export default { searchAnimeService };
+export default { searchBarService };
