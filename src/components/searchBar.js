@@ -1,62 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MDBCol, MDBFormInline, MDBBtn } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import services from '../services';
 import searchBarActions from '../actions/searchBarActions';
 
-// const {
-//   searchBarService: { searchAnime },
-// } = services;
-const { searchAnime } = searchBarActions;
+const SearchBar = ({ searchTerm, animeList, searchAnime, setSearchTerm }) => (
+  <MDBCol md="12">
+    <MDBFormInline className="md-form mr-auto mb-4">
+      <input
+        className="form-control mr-sm-2"
+        type="text"
+        placeholder="Search for an anime"
+        aria-label="Search"
+        value={searchTerm}
+        onChange={setSearchTerm}
+      />
+      <MDBBtn
+        gradient="aqua"
+        rounded
+        size="sm"
+        type="submit"
+        className="mr-auto"
+        onClick={e => {
+          e.preventDefault();
+          searchAnime(searchTerm);
+        }}
+      >
+        Search
+      </MDBBtn>
+    </MDBFormInline>
+  </MDBCol>
+);
 
-const SearchBar = props => {
-  const [searchTerm, setSearchTerm] = useState('');
-  // const [animeList, setAnimeList] = useState([]);
-
-  const updateTerm = e => {
-    e.preventDefault();
-    setSearchTerm(e.target.value);
-  };
-
-  const submit = async e => {
-    e.preventDefault();
-    await props.searchAnime(searchTerm);
-    // setAnimeList(await searchAnime(searchTerm));
-  };
-
-  return (
-    <MDBCol md="12">
-      <MDBFormInline className="md-form mr-auto mb-4">
-        <input
-          className="form-control mr-sm-2"
-          type="text"
-          placeholder="Search"
-          aria-label="Search"
-          value={searchTerm}
-          onChange={updateTerm}
-        />
-        <MDBBtn
-          gradient="aqua"
-          rounded
-          size="sm"
-          type="submit"
-          className="mr-auto"
-          onClick={submit}
-        >
-          Search
-        </MDBBtn>
-      </MDBFormInline>
-    </MDBCol>
-  );
+SearchBar.propTypes = {
+  searchAnime: PropTypes.func.isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
+  animeList: PropTypes.arrayOf(PropTypes.object),
+  searchTerm: PropTypes.string,
 };
 
-SearchBar.prototype = {
-  searchAnime: PropTypes.func.isRequired,
+SearchBar.defaultProps = {
+  animeList: [],
+  searchTerm: '',
 };
 
 const mapStateToProps = state => ({
-  animeList: state.animeList,
+  animeList: state.searchState.animeList,
+  searchTerm: state.searchState.searchTerm,
 });
 
-export default connect(mapStateToProps, { searchAnime })(SearchBar);
+const { searchAnime, setSearchTerm } = searchBarActions;
+
+export default connect(mapStateToProps, { searchAnime, setSearchTerm })(SearchBar);

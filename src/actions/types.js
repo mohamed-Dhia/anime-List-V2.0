@@ -1,1 +1,3 @@
-export const SEARCH_ANIME = 'SEARCH_ANIME';
+const SEARCH_ANIME = 'SEARCH_ANIME';
+const SEARCH_TERM = 'SEARCH_TERM';
+export default { SEARCH_ANIME, SEARCH_TERM };
