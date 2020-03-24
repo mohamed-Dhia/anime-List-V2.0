@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import searchBarActions from '../actions/searchBarActions';
 
-const SearchBar = ({ searchTerm, animeList, searchAnime, setSearchTerm }) => (
+const SearchBar = ({ searchTerm, searchAnime, setSearchTerm }) => (
   <MDBCol md="12">
     <MDBFormInline className="md-form mr-auto mb-4">
       <input
@@ -35,17 +35,14 @@ const SearchBar = ({ searchTerm, animeList, searchAnime, setSearchTerm }) => (
 SearchBar.propTypes = {
   searchAnime: PropTypes.func.isRequired,
   setSearchTerm: PropTypes.func.isRequired,
-  animeList: PropTypes.arrayOf(PropTypes.object),
   searchTerm: PropTypes.string,
 };
 
 SearchBar.defaultProps = {
-  animeList: [],
   searchTerm: '',
 };
 
 const mapStateToProps = state => ({
-  animeList: state.searchState.animeList,
   searchTerm: state.searchState.searchTerm,
 });
 
