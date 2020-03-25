@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const AnimeGrid = ({ animeList }) => {
-  const animeListVis = animeList.map(anime => <li>{anime.title}</li>);
-  return <ul>{animeListVis}</ul>;
+  const animeListLi = animeList.map(anime => <li>{anime.title}</li>);
+  return <ul>{animeListLi}</ul>;
 };
 
 AnimeGrid.propTypes = {
