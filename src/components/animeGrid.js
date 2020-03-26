@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { MDBContainer, MDBRow } from 'mdbreact';
+import OneAnimeGrid from './animeCard';
 
 const AnimeGrid = ({ animeList }) => {
-  const animeListLi = animeList.map(anime => <li>{anime.title}</li>);
-  return <ul>{animeListLi}</ul>;
+  const animes = animeList.map(anime => <OneAnimeGrid key={anime.mal_id} anime={anime} />);
+  return (
+    <MDBContainer>
+      <MDBRow>{animes}</MDBRow>
+    </MDBContainer>
+  );
 };
 
 AnimeGrid.propTypes = {
@@ -20,3 +26,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {})(AnimeGrid);
+
+// const gridExamplesPage = () => {
+//   return (
+
+//   );
+// };
+
+// export default gridExamplesPage;
